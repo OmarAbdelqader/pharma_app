@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dispense Prescription</h1>
+<form method="post" action="{{ url_for('dispense', prescription_id=prescription_id) }}">
+    <table>
+        <tr>
+            <th>Drug Name</th>
+            <th>Quantity</th>
+        </tr>
+        {% for drug in prescription_drugs %}
+        <tr>
+            <td>{{ drug[1] }}</td>
+            <td>{{ drug[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Dispense">
+</form>
+{% endblock %}

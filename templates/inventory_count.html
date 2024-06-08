@@ -1,0 +1,22 @@
+<!-- inventory_count.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Inventory Count</h1>
+<form method="post" action="{{ url_for('inventory_count') }}">
+    <label for="drug_id">Drug:</label>
+    <select id="drug_id" name="drug_id">
+        {% for drug in drugs %}
+        <option value="{{ drug[0] }}">{{ drug[1] }} (Expiry: {{ drug[2] }})</option>
+        {% endfor %}    </select>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" value="{{ current_date }}" required>
+    <input type="submit" value="Get Inventory Count">
+</form>
+
+{% if drug_details %}
+<h2>{{ drug_details[0] }}</h2>
+<p>Expiry Date: {{ drug_details[1] }}</p>
+<p>Quantity on {{ date }}: {{ total_quantity }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Drug Inventory</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Expiry Date</th>
+    </tr>
+    {% for drug in drugs %}
+    <tr>
+        <td>{{ drug[1] }}</td>
+        <td>{{ drug[2] }}</td>
+        <td>{{ drug[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
