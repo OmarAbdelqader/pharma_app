@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pharmacy App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('add_drug') }}">Add Drug</a></li>
+                <li><a href="{{ url_for('add_prescription') }}">Add Prescription</a></li>
+                <li><a href="{{ url_for('inventory_count') }}">Inventory Count</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; Pharmacy App
+    </footer>
+</body>
+</html>

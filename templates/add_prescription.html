@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Prescription</h1>
+<form method="post" action="{{ url_for('add_prescription') }}">
+    <label for="prescription_serial_number_1">Prescription Serial Number:</label>
+    <input type="text" id="prescription_serial_number_1" name="prescription_serial_number_1" required>
+    <input type="text" id="prescription_serial_number_2" name="prescription_serial_number_2" required>
+    <br>
+    <label for="drugs">Prescribed Drug:</label>
+    <select id="drugs" name="drugs" required>
+        {% for drug in drugs %}
+        <option value="{{ drug[0] }}">{{ drug[1] }}</option>
+        {% endfor %}
+    </select>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+    <br>
+    <label for="prescription_date">Prescription Date:</label>
+    <input type="date" id="prescription_date" name="prescription_date" value="{{ current_date }}" required>
+    <input type="submit" value="Add Prescription and Dispense">
+</form>
+{% endblock %}
