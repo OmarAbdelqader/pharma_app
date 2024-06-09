@@ -91,7 +91,7 @@ def add_prescription():
         c.execute("INSERT INTO prescription_drugs (prescription_id, drug_id, quantity, prescription_date) VALUES (?, ?, ?, ?)", (prescription_id, drug_id, quantity, prescription_date))
         conn.commit()
         # Update inventory log for dispensed drug
-        c.execute("INSERT INTO inventory_log (drug_id, quantity, transaction_date, transaction_type) VALUES (?, ?, DATE('now'), 'dispensed')", (drug_id, -int(quantity)))
+        c.execute("INSERT INTO inventory_log (drug_id, quantity, transaction_date, transaction_type) VALUES (?, ?, ?, 'dispensed')", (drug_id, -int(quantity), prescription_date))
         conn.commit()
         return redirect(url_for('index'))
     # Sort drugs by name and expiry_date
