@@ -1,3 +1,3 @@
 window.onload = function() {
-    document.getElementById('focused-input').focus();
+    document.getElementById('prescription_serial_number_1').focus();
   }

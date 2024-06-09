@@ -77,6 +77,9 @@ conn.commit()
 
 @app.route('/add_prescription', methods=['GET', 'POST'])
 def add_prescription():
+    # Sort drugs by name and expiry_date
+    c.execute(select_all_drugs)
+    drugs = c.fetchall()
     if request.method == 'POST':
         prescription_serial_number_1 = request.form['prescription_serial_number_1']
         prescription_serial_number_2 = request.form['prescription_serial_number_2']
@@ -93,10 +96,10 @@ def add_prescription():
         # Update inventory log for dispensed drug
         c.execute("INSERT INTO inventory_log (drug_id, quantity, transaction_date, transaction_type) VALUES (?, ?, ?, 'dispensed')", (drug_id, -int(quantity), prescription_date))
         conn.commit()
-        return redirect(url_for('index'))
-    # Sort drugs by name and expiry_date
-    c.execute(select_all_drugs)
-    drugs = c.fetchall()
+        # return add_prescription.html with previous data from the last POST request except prescription_serial_number_2
+        return render_template('add_prescription.html', prescription_serial_number_1=prescription_serial_number_1, current_date=prescription_date, quantity=quantity, drug_id=drug_id, drugs=drugs)
+        # return redirect(url_for('index')) --- not working
+
     return render_template('add_prescription.html', drugs=drugs, current_date=current_date)
 
 
