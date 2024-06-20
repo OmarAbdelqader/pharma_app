@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Prescription</h1>
+
+<!-- Search form -->
+<form method="post" action="{{ url_for('edit_prescription') }}">
+    <label for="prescription_serial_number_1">Prescription Serial Number:</label>
+    <input type="text" id="prescription_serial_number_1" name="prescription_serial_number_1" value="{{ prescription_serial_number_1 }}" required>
+    <input type="text" id="prescription_serial_number_2" name="prescription_serial_number_2" value="{{ prescription_serial_number_2 }}" required>
+    <input type="submit" name="search" value="Search">
+</form>
+
+{% if drugs %}
+<!-- Update form -->
+<form method="post" action="{{ url_for('edit_prescription') }}">
+    <label for="prescription_serial_number_1">Prescription Serial Number:</label>
+    <input type="text" id="prescription_serial_number_1" name="prescription_serial_number_1" value="{{ prescription_serial_number_1 }}" required>
+    <input type="text" id="prescription_serial_number_2" name="prescription_serial_number_2" value="{{ prescription_serial_number_2 }}" required>
+    <br>
+    <table>
+        <tr>
+            <th>Drug</th>
+            <th>Quantity</th>
+            <th>Prescription Date</th>
+            <th>Action</th>
+        </tr>
+        {% for drug in drugs %}
+        <tr>
+            <td><input type="hidden" name="drug_id" value="{{ drug[1] }}"></td>
+            <td>{{ drug[4] }}</td>
+            <td><input type="number" name="quantity" value="{{ drug[2] }}" min="1" required></td>
+            <td><input type="date" name="prescription_date" value="{{ drug[3] }}" required></td>
+            <td><input type="submit" name="update" value="Update"></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% else %}
+<p>No prescription found.</p>
+{% endif %}
+{% endblock %}

@@ -2,10 +2,12 @@
 
 {% block content %}
 <h1>Add Prescription</h1>
+
 <form method="post" action="{{ url_for('add_prescription') }}">
     <label for="prescription_serial_number_1">Prescription Serial Number:</label>
     <input type="text" id="prescription_serial_number_1" name="prescription_serial_number_1" value="{{ prescription_serial_number_1 }}" required>
     <input type="text" id="prescription_serial_number_2" name="prescription_serial_number_2" required>
+    <div class="alert-container" id="alertMessage"></div>
     <br>
     <label for="drugs">Prescribed Drug:</label>
     <select id="drugs" name="drugs" value="{{ drug_id, }}" required>
@@ -20,4 +22,13 @@
     <input type="date" id="prescription_date" name="prescription_date" value="{{ current_date }}" required>
     <input type="submit" value="Add Prescription and Dispense">
 </form>
+
+   <!-- Alert message -->
+   {% if alert_message %}
+   <script>
+       var alertContainer = document.getElementById('alertMessage');
+       alertContainer.textContent = "{{ alert_message }}";
+       alertContainer.style.display = "block";
+   </script>
+   {% endif %}
 {% endblock %}

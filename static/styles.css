@@ -65,3 +65,14 @@ input[type="submit"] {
     border: none;
     cursor: pointer;
 }
+
+/* Styles for the alert message */
+.alert-container {
+    background-color: #f57970;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 22px;
+    display: none; /* Initially hide the alert message */
+}
